@@ -40,7 +40,7 @@ export default function PurchaseHistory() {
 		try {
 			await Axios.put('/purchase', { purchase, password });
 			alert('Purchase Updated');
-			navigate('/purchase');
+			navigate('/us_inventory/purchase');
 		} catch (e) {
 			if (e.response?.status === 404) {
 				return alert(e.response.data);

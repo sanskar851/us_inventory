@@ -15,14 +15,18 @@ export default function App() {
 				<Navbar />
 				<div className='w-screen  bg-zinc-100' style={{ height: 'calc(100vh - 40px)' }}>
 					<Routes>
-						<Route exact path='/add-product' element={<AddProduct />}></Route>
-						<Route exact path='/purchase' element={<Purchase />}></Route>
-						<Route exact path='/purchase-history' element={<PurchaseHistory />}></Route>
-						<Route exact path='/sales' element={<Sales />}></Route>
-						<Route exact path='/sales-history' element={<SaleHistory />}></Route>
-						<Route exact path='/report' element={<Report />}></Route>
-						<Route exact path='/' element={<Home />}></Route>
-						<Route render={() => <Navigate to={`/`} />} />
+						<Route exact path='/us_inventory/add-product' element={<AddProduct />}></Route>
+						<Route exact path='/us_inventory/purchase' element={<Purchase />}></Route>
+						<Route
+							exact
+							path='/us_inventory/purchase-history'
+							element={<PurchaseHistory />}
+						></Route>
+						<Route exact path='/us_inventory/sales' element={<Sales />}></Route>
+						<Route exact path='/us_inventory/sales-history' element={<SaleHistory />}></Route>
+						<Route exact path='/us_inventory/report' element={<Report />}></Route>
+						<Route exact path='/us_inventory/' element={<Home />}></Route>
+						<Route render={() => <Navigate to={`/us_inventory`} />} />
 					</Routes>
 				</div>
 			</div>

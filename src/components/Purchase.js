@@ -89,7 +89,7 @@ export default function Purchase() {
 					<div className='flex justify-between mt-4'>
 						<span
 							className={`py-1 px-5 bg-primary rounded-md text-white font-medium cursor-pointer opacity-80 hover:opacity-100`}
-							onClick={(e) => navigate('/purchase-history')}
+							onClick={(e) => navigate('/us_inventory/purchase-history')}
 						>
 							Search Bill
 						</span>

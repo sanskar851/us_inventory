@@ -40,7 +40,7 @@ export default function SaleHistory() {
 		try {
 			await Axios.put('/sale', { sale, password });
 			alert('Sale Updated');
-			navigate('/sales');
+			navigate('/us_inventory/sales');
 		} catch (e) {
 			if (e.response?.status === 404) {
 				return alert(e.response.data);

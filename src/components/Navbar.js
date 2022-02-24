@@ -15,7 +15,7 @@ export default function Navbar() {
 	function Menu(props) {
 		return (
 			<span
-				onClick={(e) => navigate(`/${props.to}`)}
+				onClick={(e) => navigate(`/us_inventory/${props.to}`)}
 				className='px-2 hover:underline cursor-pointer  font-medium'
 			>
 				{props.text}
