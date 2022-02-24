@@ -1,13 +1,12 @@
 import React from 'react';
 import Axios from '../Controller/Axios';
-import { useNavigate } from 'react-router-dom';
+import { PAGE } from '../App';
 import ConfirmDialog from './ConfirmDialog';
 const DIALOG = {
 	CLOSE: 0,
 	OPEN: 1,
 };
-export default function Sales() {
-	const navigate = useNavigate();
+export default function Sales({ setPage }) {
 	const mounted = React.useRef(true);
 	const [dialog, openDialog] = React.useState(DIALOG.CLOSE);
 	React.useEffect(() => {
@@ -90,7 +89,7 @@ export default function Sales() {
 					<div className='flex justify-between mt-4'>
 						<span
 							className={`py-1 px-5 bg-primary rounded-md text-white font-medium cursor-pointer opacity-80 hover:opacity-100`}
-							onClick={(e) => navigate('/us_inventory/sales-history')}
+							onClick={(e) => setPage(PAGE.SALES_HISTORY)}
 						>
 							Search Bill
 						</span>

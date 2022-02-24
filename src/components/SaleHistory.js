@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { PAGE } from '../App';
 import $ from 'jquery';
 import Axios from '../Controller/Axios';
 
@@ -7,8 +7,7 @@ const DIALOG = {
 	CLOSE: 0,
 	OPEN: 1,
 };
-export default function SaleHistory() {
-	const navigate = useNavigate();
+export default function SaleHistory({ setPage }) {
 	const mounted = React.useRef(true);
 	React.useEffect(() => {
 		mounted.current = true;
@@ -40,7 +39,7 @@ export default function SaleHistory() {
 		try {
 			await Axios.put('/sale', { sale, password });
 			alert('Sale Updated');
-			navigate('/us_inventory/sales');
+			setPage(PAGE.SALES);
 		} catch (e) {
 			if (e.response?.status === 404) {
 				return alert(e.response.data);

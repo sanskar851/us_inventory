@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import AddProduct from './components/AddProduct';
@@ -8,28 +8,30 @@ import Report from './components/Report';
 import PurchaseHistory from './components/PurchaseHistory';
 import SaleHistory from './components/SaleHistory';
 
+const PAGE = {
+	HOME: 0,
+	ADD_PRODUCT: 1,
+	PURCHASE: 2,
+	SALES: 3,
+	SALES_HISTORY: 4,
+	PURCHASE_HISTORY: 5,
+	REPORT: 6,
+};
 export default function App() {
+	const [page, setPage] = React.useState(PAGE.HOME);
 	return (
-		<Router>
-			<div className='w-screen h-screen  bg-zinc-100'>
-				<Navbar />
-				<div className='w-screen  bg-zinc-100' style={{ height: 'calc(100vh - 40px)' }}>
-					<Routes>
-						<Route exact path='/us_inventory/add-product' element={<AddProduct />}></Route>
-						<Route exact path='/us_inventory/purchase' element={<Purchase />}></Route>
-						<Route
-							exact
-							path='/us_inventory/purchase-history'
-							element={<PurchaseHistory />}
-						></Route>
-						<Route exact path='/us_inventory/sales' element={<Sales />}></Route>
-						<Route exact path='/us_inventory/sales-history' element={<SaleHistory />}></Route>
-						<Route exact path='/us_inventory/report' element={<Report />}></Route>
-						<Route exact path='/us_inventory/' element={<Home />}></Route>
-						<Route render={() => <Navigate to={`/us_inventory`} />} />
-					</Routes>
-				</div>
+		<div className='w-screen h-screen  bg-zinc-100'>
+			<Navbar setPage={setPage} />
+			<div className='w-screen  bg-zinc-100' style={{ height: 'calc(100vh - 40px)' }}>
+				{page === PAGE.HOME && <Home />}
+				{page === PAGE.ADD_PRODUCT && <AddProduct />}
+				{page === PAGE.PURCHASE && <Purchase />}
+				{page === PAGE.SALES && <Sales />}
+				{page === PAGE.SALES_HISTORY && <SaleHistory />}
+				{page === PAGE.PURCHASE_HISTORY && <PurchaseHistory />}
+				{page === PAGE.REPORT && <Report />}
 			</div>
-		</Router>
+		</div>
 	);
 }
+export { PAGE };
