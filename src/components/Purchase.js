@@ -8,6 +8,7 @@ const DIALOG = {
 };
 export default function Purchase({ setPage }) {
 	const mounted = React.useRef(true);
+	const [searchText, setSearchText] = React.useState('');
 	const [dialog, openDialog] = React.useState(DIALOG.CLOSE);
 	React.useEffect(() => {
 		mounted.current = true;
@@ -55,7 +56,9 @@ export default function Purchase({ setPage }) {
 			alert('Purchase Complete');
 			fetchSearchProducts();
 		} catch (e) {
-			alert('Unable to purchse products');
+			if (e.response) {
+				alert(e.response.data);
+			} else alert('Unable to purchse products');
 		}
 	};
 
@@ -64,6 +67,16 @@ export default function Purchase({ setPage }) {
 			<div className='w-full h-full flex flex-col items-center px-3'>
 				<span className='font-bold text-2xl text-black/70 my-3'>Purchase</span>
 				<div className='w-full lg:w-3/4 py-4 px-2 lg:px-4 rounded-xl bg-white'>
+					<div className='flex justify-end mb-2'>
+						<input
+							className=' w-1/4 border-[1px] rounded-md outline-none bg-zinc-50 py-1 px-3'
+							value={searchText}
+							onChange={(e) => setSearchText(e.target.value)}
+							type={'text'}
+							tabIndex={1}
+							placeholder={'Search'}
+						/>
+					</div>
 					<div className='w-full flex border-[1px]'>
 						<span className='w-6/12 text-left px-2 font-medium '>Product Name</span>
 						<span className='w-2/12 text-left px-2 font-medium border-l-[1px]'>Price</span>
@@ -82,6 +95,7 @@ export default function Purchase({ setPage }) {
 								update={(stock) => {
 									update(product, stock);
 								}}
+								searchText={searchText}
 							/>
 						))}
 					</div>
@@ -114,9 +128,10 @@ export default function Purchase({ setPage }) {
 	);
 }
 
-function Product({ detail, update }) {
+function Product({ detail, update, searchText }) {
 	const [cbb, setCBB] = React.useState(Math.floor(detail.stock / detail.qty));
 	const [pcs, setPCS] = React.useState(Math.floor(detail.stock % detail.qty));
+	if (searchText && !detail.name.toLowerCase().startsWith(searchText.toLowerCase())) return <></>;
 	return (
 		<div className='w-full flex border-b-[1px] border-l-[1px] border-r-[1px] outline-none'>
 			<span className='w-6/12 text-left px-2  outline-none '>{detail.name}</span>

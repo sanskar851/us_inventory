@@ -45,7 +45,9 @@ export default function AddProduct() {
 			});
 			alert('Product Added');
 		} catch (e) {
-			alert('Error saving products.');
+			if (e.response) {
+				alert(e.response.data);
+			} else alert('Error saving products.');
 		}
 	};
 
